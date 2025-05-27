@@ -1,38 +1,83 @@
-In this project, I had created an database that can be used for online retail store. This database serves for different type of users like customer, admin, employee and supplier using different types of sql commands.
-inbuilt functionalities:  (specific command_type)
-    1.stock update after payment - (trigger)
-    2.increase discount during sales season - (trigger)
-    3.Refund customer if the order does not reach them on time - (trigger)
-    4.alerts the responsible employees/supplier when the quantity of a product available goes below 100 - (trigger)
-functionalities served for customer:     (specific command_type)
-    1.list of products in furniture category -  (JOIN )
-    2.product details whose price is less than 1000 - (ORDER BY)
-    3.product details whose price is less than dark fantasy 
-    4.list of electronic appliances whose discount is between 30% and 40% 
-    5.cheapest product price and costliest product price in categories 1 - 50 
-    6.List details of all Products of furniture Category - (JOIN on condition)
-    7.Add to cart 
-    8.Do payment
-functionalities served for admin:   (specific command_type)
-    1.all order details list 
-    2.list of employees whose salary is more than 10000 
-    3.list of available delivery employees 
-    4.names of admin who are manager and architect - (UNION)
-    5.average salary and total gross salary of all employees - (SUM)
-    6.list of subscription types whose subscribers count is more than 20 - (group by, order by)
-    7.list of customers who placed orders between amount 100000 and 200000 - (INNER JOIN, ORDER BY)
-    8.Name of Customers who have placed order between 100000 and 200000 - (INNER JOIN on condition ORDER BY)
-    9.list of total bill of delivered orders an delivery agent collected from particular customers in certain time - (GROUP BY)
-functionalities served for employee:      (specific command_type)
-    1.list of prime subcribers 
-    2.supplier details of particular order id 
-    3.list of emplyees who doesnot have last name 
-    4.List of all Employees who are available for delivery 
-    5.Get the Status, Delivery Time, Bill & Details of delivery agent for the current Order of a customer
-functionalities served for supplier:     (specific command_type)
-    1.count of products added in carts till now of category bevrages - (INNER JOIN)
-    2.list of products quantity purchased by each subscription type - (JOIN, GROUP BY)
-some other functionalites:
-    total salary of employes according to their gender and age - (ROLL UP)
-    list of each transaction amount paid through cash or debit card - (ROLL UP HAVING)
-    total account balance of each subcription type - 
+## Project — BigMart RDBMS
+
+A SQL-driven back-end for an online retail store supporting four roles—Customer, Admin, Employee, and Supplier—plus a set of automatic triggers that keep data consistent and business rules enforced.
+
+---
+
+### ⭐ Built-in Triggers
+| # | Business Rule | SQL Mechanism |
+|---|---------------|---------------|
+| 1 | **Update stock** immediately after a successful payment | `TRIGGER` |
+| 2 | **Increase discounts** automatically during a sales season | `TRIGGER` |
+| 3 | **Refund customer** if an order is late | `TRIGGER` |
+| 4 | **Alert staff/suppliers** when product quantity falls below 100 | `TRIGGER` |
+
+---
+
+### 🛒 Customer-Facing Queries & Actions
+| # | Description | Key SQL Feature |
+|---|-------------|-----------------|
+| 1 | List products in the **Furniture** category | `JOIN` |
+| 2 | Show product details where **price < 1000** | `ORDER BY` |
+| 3 | Show product details of item **“Dark Fantasy”** | `SELECT … WHERE name = 'Dark Fantasy'` |
+| 4 | List electronic appliances with **30 %–40 % discount** | `BETWEEN` |
+| 5 | Fetch the **cheapest & costliest** product prices in categories 1 – 50 | `MIN`, `MAX` |
+| 6 | List **all Furniture products** with extended details | `JOIN … ON` |
+| 7 | **Add to cart** | `INSERT` |
+| 8 | **Make payment / checkout** | `UPDATE`, `INSERT` |
+
+---
+
+### 🔧 Admin-Facing Queries
+| # | Description | Key SQL Feature |
+|---|-------------|-----------------|
+| 1 | Show **all orders** | `SELECT *` |
+| 2 | List employees whose **salary > 10000** | `WHERE` |
+| 3 | View currently **available delivery employees** | `WHERE status = 'available'` |
+| 4 | Names of admins who are **both Manager _and_ Architect** | `UNION` |
+| 5 | **Avg. & Total salaries** of all employees | `AVG`, `SUM` |
+| 6 | Subscription types with **> 20 subscribers** | `GROUP BY`, `HAVING`, `ORDER BY` |
+| 7 | Customers with **orders ₹100 000 – ₹200 000** | `INNER JOIN`, `BETWEEN`, `ORDER BY` |
+| 8 | Names of those customers (same range) | `INNER JOIN`, `BETWEEN`, `ORDER BY` |
+| 9 | Total bill amounts collected by each delivery agent in a time range | `GROUP BY` |
+
+---
+
+### 👔 Employee-Facing Queries
+| # | Description | Key SQL Feature |
+|---|-------------|-----------------|
+| 1 | List all **Prime subscribers** | `WHERE subscription = 'Prime'` |
+| 2 | Supplier details for a **given order ID** | `JOIN` |
+| 3 | Employees **without a last name** | `WHERE last_name IS NULL` |
+| 4 | Employees currently **available for delivery** | `WHERE status = 'available'` |
+| 5 | Status, delivery time, bill & agent details for a customer’s current order | `JOIN`, `WHERE` |
+
+---
+
+### 🏭 Supplier-Facing Queries
+| # | Description | Key SQL Feature |
+|---|-------------|-----------------|
+| 1 | Count of **beverages** items currently in carts | `INNER JOIN`, `COUNT` |
+| 2 | Quantity of each product **purchased per subscription type** | `JOIN`, `GROUP BY` |
+
+---
+
+### 📊 Cross-Functional Analytics
+| # | Description | Key SQL Feature |
+|---|-------------|-----------------|
+| 1 | Total salary expenditure by **gender & age** | `ROLLUP` |
+| 2 | Transaction amounts paid via **Cash vs Debit Card** | `ROLLUP`, `HAVING` |
+| 3 | Total **account balance per subscription type** | `GROUP BY` |
+
+---
+
+### 🗄️ Tech Stack
+* **MySQL** / **MariaDB** (tested with MySQL 8.0)
+* SQL scripts organized in `/sql` directory
+* CLI interface written in **Python 3.11**
+
+> **Tip:** Run `source schema.sql` followed by `source demo_data.sql` to bootstrap the database quickly.
+
+---
+
+
