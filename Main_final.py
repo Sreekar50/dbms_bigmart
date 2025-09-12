@@ -8,7 +8,7 @@ cid = 0
 BG = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="Sreekar@33",
+  password="**********",
   database="bigmart1"
 )
 cursor = BG.cursor()
@@ -294,4 +294,5 @@ while(True):
 cursor.close()
 DB.close()
 BG.close()
+
 
